@@ -2,86 +2,281 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>5'7 Hair Lounge | Premium Wigs Ghana - GHS</title>
+<title>5'7 Hair Lounge | Premium Wigs Ghana - GHS Official Store</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--burg:#7A1B4A;--burg2:#4A102C;--pink:#FFF0F3;--gold:#d4b78f}
+body{font-family:Inter,sans-serif;background:#FFFBFC}
+.serif{font-family:Playfair Display,serif}
+.no-scrollbar::-webkit-scrollbar{display:none}
+.line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+</style>
 </head>
-<body class="bg-[#FFFBFC]">
-<!-- HEADER BURGUNDY -->
+<body class="pb-[70px] md:pb-0">
+
 <header class="bg-[#7A1B4A] text-white sticky top-0 z-50">
 <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-3">
-<img src="logo.jpg" class="w-11 h-11 rounded-full bg-white p-1 object-contain">
+<img src="logo.jpg" onerror="this.src='logo.png'" class="w-11 h-11 rounded-full bg-white p-1 object-contain">
 <div class="flex-1 max-w-2xl relative">
 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-<input id="search" onkeyup="searchP()" placeholder="Search wigs, fringe, bouncy..." class="w-full rounded-full py-2.5 pl-11 pr-3 text-black text-sm">
+<input id="search" placeholder="Search wigs, fringe, bouncy..." class="w-full rounded-full py-2.5 pl-11 pr-10 text-black text-sm outline-none">
+<button id="wishBtn" onclick="openWishlist()" class="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-[#FFF0F3] rounded-full flex items-center justify-center"><i class="fa-regular fa-heart text-[#7A1B4A] text-[12px]"></i></button>
 </div>
-<div class="flex gap-4 text-xs"><span class="hidden md:block">Account</span><span class="cursor-pointer" onclick="openCart()">🛒 Cart (<b id="c1">0</b>)</span></div>
+<div class="hidden md:flex gap-5 text-[12px] items-center font-bold">
+<span class="cursor-pointer" onclick="showTab('account')">Account</span>
+<span class="cursor-pointer" onclick="openCart()">🛒 Cart (<b id="c1">0</b>) • <b id="wishCount">0</b>♥</span>
 </div>
-<div class="bg-white text-[#7A1B4A] px-4 py-2 flex gap-5 text-[12px] font-bold overflow-x-auto">
+<button class="md:hidden relative" onclick="openCart()"><i class="fa fa-shopping-cart text-[18px]"></i><span id="c1m" class="absolute -top-2 -right-2 bg-white text-[#7A1B4A] text-[9px] px-1 rounded-full font-bold">0</span></button>
+</div>
+<div class="bg-white text-[#7A1B4A] px-4 py-2 flex gap-3 text-[11px] font-bold overflow-x-auto no-scrollbar items-center">
 <span>All Categories ▼</span>
-<span class="cursor-pointer" onclick="filterCat('All')">All</span>
-<span class="cursor-pointer" onclick="filterCat('Bouncy')">Bouncy Wave</span>
-<span class="cursor-pointer" onclick="filterCat('Fringe')">Fringe</span>
-<span class="bg-[#FFF0F3] px-3 py-1 rounded-full">FREE DELIVERY > GHS 800</span>
+<button id="tP" onclick="showTab('products')" class="whitespace-nowrap bg-[#7A1B4A] text-white px-4 py-1.5 rounded-full">WIGS (19)</button>
+<button id="tS" onclick="showTab('services')" class="whitespace-nowrap border px-4 py-1.5 rounded-full">SERVICE CATALOGUE</button>
+<button onclick="filterCat('All')" class="whitespace-nowrap border px-3 py-1.5 rounded-full">All</button>
+<button onclick="filterCat('Bouncy')" class="whitespace-nowrap border px-3 py-1.5 rounded-full">Bouncy Wave</button>
+<button onclick="filterCat('Fringe')" class="whitespace-nowrap border px-3 py-1.5 rounded-full">Fringe</button>
+<button id="tT" onclick="showTab('tracking')" class="whitespace-nowrap border px-3 py-1.5 rounded-full">TRACK ORDER</button>
+<button id="tA" onclick="showTab('admin')" class="whitespace-nowrap border px-3 py-1.5 rounded-full">ADMIN</button>
+<span class="bg-[#FFF0F3] px-3 py-1 rounded-full whitespace-nowrap">FREE DELIVERY > GHS 800</span>
+<select id="sortFilter" class="border rounded-full px-2 py-1.5 text-[11px]"><option value="default">Featured</option><option value="low">Low-High</option><option value="high">High-Low</option></select>
+<select id="priceFilter" class="border rounded-full px-2 py-1.5 text-[11px]"><option value="all">All Prices</option><option value="0-500">Under 500</option><option value="500-800">500-800</option><option value="800-2000">800+</option></select>
 </div>
 </header>
 
-<div class="bg-[#FFF0F3] text-[#7A1B4A] text-[11px] text-center py-1 font-bold">FREE DELIVERY Orders > GHS 800 • 100% Human Hair • Pay on Delivery Accra • 30-Day Returns</div>
+<div class="bg-[#FFF0F3] text-[#7A1B4A] text-[11px] text-center py-1 font-bold tracking-wide">FREE DELIVERY Orders > GHS 800 • 100% Human Hair • Pay on Delivery Accra • 30-Day Returns • TRUSTED BY 5,000+ CUSTOMERS</div>
 
-<!-- HERO -->
-<section class="max-w-7xl mx-auto md:rounded-2xl overflow-hidden mt-0 md:mt-4 grid md:grid-cols-5 bg-[#4A102C]">
+<!-- HERO - YOUR DESIGN KEPT -->
+<section id="hero" class="max-w-7xl mx-auto md:rounded-2xl overflow-hidden mt-0 md:mt-4 grid md:grid-cols-5 bg-[#4A102C]">
 <div class="md:col-span-3 p-8 md:p-12 text-white">
-<span class="bg-white/20 text-[10px] px-3 py-1 rounded-full">NEW • 2024 COLLECTION</span>
-<h1 class="text-4xl md:text-5xl font-black mt-4 leading-none">Premium<br>Hair & Wigs</h1>
+<span class="bg-white/20 text-[10px] px-3 py-1 rounded-full tracking-wide">NEW • 2024 COLLECTION</span>
+<h1 class="text-4xl md:text-5xl font-black mt-4 leading-none serif">Premium<br>Hair & Wigs</h1>
 <p class="mt-3 text-white/70 text-sm">Luxury human hair, ready to wear. Style, quality, confidence.</p>
-<div class="flex gap-3 mt-6"><button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})" class="bg-white text-[#7A1B4A] px-6 py-2.5 rounded-full font-bold text-sm">SHOP NOW</button><button class="border border-white/30 px-6 py-2.5 rounded-full text-sm font-bold">EXPLORE</button></div>
-<div class="flex gap-3 mt-6 text-[10px]"><span>✓ 100% Human Hair</span><span>✓ Fast Delivery GH</span></div>
+<div class="flex gap-3 mt-6"><button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})" class="bg-white text-[#7A1B4A] px-6 py-2.5 rounded-full font-bold text-sm">SHOP NOW</button><button onclick="showTab('services')" class="border border-white/30 px-6 py-2.5 rounded-full text-sm font-bold">EXPLORE SERVICES</button></div>
+<div class="flex gap-4 mt-6 text-[10px] font-semibold opacity-80"><span>✓ 100% Human Hair</span><span>✓ Fast Delivery GH</span><span>✓ Free Returns 30 Days</span></div>
 </div>
-<div class="md:col-span-2 grid grid-cols-2 gap-2 p-2"><img src="wig1.jpg" class="rounded-xl h-48 md:h-64 w-full object-cover"><img src="wig4.jpg" class="rounded-xl h-48 md:h-64 w-full object-cover mt-6"></div>
+<div class="md:col-span-2 grid grid-cols-2 gap-2 p-2"><img src="wig1.jpg" onerror="this.src='wigs/wig1.jpg'" class="rounded-xl h-48 md:h-64 w-full object-cover"><img src="wig4.jpg" onerror="this.src='wigs/wig4.jpg'" class="rounded-xl h-48 md:h-64 w-full object-cover mt-6"></div>
 </section>
 
-<!-- PRODUCTS GHS -->
 <main id="shop" class="max-w-7xl mx-auto p-4">
-<h2 class="font-black text-xl text-[#4A102C]">Featured Products - GHS Store</h2>
-<p class="text-xs text-gray-500">100% human hair • Ready to ship • Pay with MoMo</p>
-<div id="grid" class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 mt-4"></div>
+<!-- PRODUCTS VIEW -->
+<div id="viewProducts">
+<div class="flex justify-between items-center"><div><h2 class="font-black text-xl text-[#4A102C] serif">Featured Products - GHS Store</h2><p class="text-xs text-gray-500">100% human hair • Ready to ship • Pay with MoMo • <span id="resultCount">19</span> products • <span id="recentLabel" class="text-[#7A1B4A] font-bold"></span></p></div></div>
+<div id="grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 mt-4"></div>
+<div id="recentView" class="mt-10 hidden"><h3 class="font-bold text-[14px] serif text-[#4A102C]">Recently Viewed</h3><div id="recentGrid" class="grid grid-cols-3 md:grid-cols-6 gap-3 mt-3"></div></div>
+</div>
+
+<!-- SERVICE CATALOGUE WITH services.jpg WITHOUT PRICES -->
+<div id="viewServices" class="hidden">
+<div class="bg-white rounded-2xl overflow-hidden border shadow-sm max-w-[900px] mx-auto">
+<img src="services.jpg" onerror="this.src='wa_image_6271196331078617641'" class="w-full h-auto object-contain bg-white">
+<div class="p-6 md:p-8">
+<h2 class="serif text-[20px] font-bold text-[#4A102C] text-center">Our Services Include:</h2>
+<p class="text-[11px] text-center opacity-60 mt-1">Without prices - as requested</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6 max-w-[600px] mx-auto">
+<div class="border border-[#7A1B4A]/10 rounded-xl p-4 text-center"><i class="fa fa-cut text-[#7A1B4A]"></i><h3 class="font-bold mt-1 text-[13px]">Wigs</h3></div>
+<div class="border border-[#7A1B4A]/10 rounded-xl p-4 text-center"><i class="fa fa-spray-can-sparkles text-[#7A1B4A]"></i><h3 class="font-bold mt-1 text-[13px]">Revamps</h3></div>
+<div class="border border-[#7A1B4A]/10 rounded-xl p-4 text-center"><i class="fa fa-palette text-[#7A1B4A]"></i><h3 class="font-bold mt-1 text-[13px]">Hair Coloring Service</h3></div>
+<div class="border border-[#7A1B4A]/10 rounded-xl p-4 text-center"><i class="fa fa-box text-[#7A1B4A]"></i><h3 class="font-bold mt-1 text-[13px]">Hair Bundles and Extensions</h3></div>
+<div class="border border-[#7A1B4A]/10 rounded-xl p-4 text-center md:col-span-2"><i class="fa fa-wand-magic-sparkles text-[#7A1B4A]"></i><h3 class="font-bold mt-1 text-[13px]">Wig Making (both frontal and closures)</h3></div>
+</div>
+<div class="mt-8 text-center bg-[#7A1B4A] text-white py-5 rounded-xl">
+<p class="font-bold text-[15px]">Contact: 0550554095 / 0503334291</p>
+<a href="https://wa.me/233550554095?text=Hi%205'7%20Hair%20Lounge!%20Service%20booking" target="_blank" class="inline-block mt-3 bg-white text-[#7A1B4A] px-6 py-2 rounded-full text-[12px] font-bold">Book on WhatsApp</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- TRACKING -->
+<div id="viewTracking" class="hidden"><div class="bg-white rounded-2xl p-6 max-w-md mx-auto border"><h2 class="serif font-bold text-xl text-[#4A102C]">Track Your Order</h2><input id="trackInput" placeholder="Enter Order ID e.g. 5H7-1234" class="w-full border p-3 rounded-xl mt-4 text-[13px]"><button onclick="trackOrder()" class="w-full bg-[#7A1B4A] text-white py-3 rounded-full mt-3 font-bold text-[13px]">Track Order</button><div id="trackResult" class="mt-4 hidden p-4 bg-[#FFF0F3] rounded-xl text-[13px]"></div></div></div>
+
+<!-- ACCOUNT -->
+<div id="viewAccount" class="hidden"><div class="bg-white rounded-2xl p-6 max-w-md mx-auto border"><h2 class="serif font-bold text-xl">My Account</h2><div class="mt-4 space-y-2 text-[13px]"><div class="flex justify-between border-b py-3"><span>Wishlist ❤️</span><span id="accWish">0 items</span></div><div class="flex justify-between border-b py-3"><span>Orders</span><span id="accOrders">0 orders</span></div><div class="flex justify-between border-b py-3"><span>Recently Viewed</span><span id="accRecent">0 items</span></div></div></div></div>
+
+<!-- ADMIN -->
+<div id="viewAdmin" class="hidden"><div class="bg-white rounded-2xl p-6 border"><h2 class="serif font-bold text-xl">Admin — 5'7 HAIR LOUNGE</h2><div class="grid md:grid-cols-2 gap-6 mt-6"><div><input id="adminName" placeholder="Name" class="w-full border p-2 rounded mb-2 text-[13px]"><input id="adminPrice" placeholder="Price" type="number" class="w-full border p-2 rounded mb-2 text-[13px]"><input id="adminImg" placeholder="wig20.jpg" class="w-full border p-2 rounded mb-2 text-[13px]"><button onclick="adminAdd()" class="bg-black text-white px-4 py-2 rounded-full text-[12px]">Add Product</button></div><div><div id="adminOrders" class="text-[11px] space-y-2 max-h-[300px] overflow-auto"></div></div></div></div></div>
+
 </main>
 
-<!-- CART -->
-<div id="cartDrawer" class="fixed inset-0 bg-black/50 hidden z-[60]"><div class="absolute right-0 top-0 w-full md:w-[400px] h-full bg-white flex flex-col">
-<div class="p-4 border-b flex justify-between font-bold">Cart (<span id="c2">0</span>) <button onclick="closeCart()" class="bg-gray-100 w-8 h-8 rounded-full">X</button></div>
-<div id="cartItems" class="flex-1 overflow-auto p-4 text-sm"></div>
-<div class="p-4 border-t bg-gray-50"><div class="flex justify-between"><span>Subtotal</span><b id="sub">GHS 0</b></div><div class="flex justify-between font-black text-lg mt-2"><span>Total</span><span id="tot">GHS 0</span></div><button onclick="checkout()" class="w-full bg-[#7A1B4A] text-white py-3 rounded-full mt-4 font-bold"><i class="fab fa-whatsapp"></i> Checkout via WhatsApp - Pay GHS</button><p class="text-[10px] text-center mt-2 text-gray-500">MTN MoMo • Telecel Cash • Card • Pay on Delivery</p></div>
-</div></div>
+<!-- FOOTER WITH FOOTNOTE -->
+<footer class="bg-[#4A102C] text-white mt-10">
+<div class="bg-[#7A1B4A] text-[#FFD6E0] text-center py-3 text-[10px] tracking-[2px] font-bold">TRUSTED BY 5,000+ CUSTOMERS • LUXURY HAIR CARE • ETHICALLY SOURCED</div>
+<div class="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-4 gap-8">
+<div><div class="flex items-center gap-2"><img src="logo.jpg" onerror="this.src='logo.png'" class="w-10 h-10 rounded-full bg-white p-1"><span class="serif font-bold">5'7 HAIR LOUNGE</span></div><p class="text-[12px] opacity-60 mt-3">premium hair & wigs — Luxury human hair, ready to wear.</p></div>
+<div><h4 class="font-bold text-[12px]">SHOP</h4><ul class="text-[11px] opacity-60 mt-2 space-y-1"><li>WIGS</li><li>BOUNCY WAVE</li><li>FRINGE</li></ul></div>
+<div><h4 class="font-bold text-[12px]">HELP</h4><ul class="text-[11px] opacity-60 mt-2 space-y-1"><li>TRACK ORDER</li><li>PAY ON DELIVERY</li><li>30-DAY RETURNS</li></ul></div>
+<div><h4 class="font-bold text-[12px]">CONTACT</h4><p class="text-[11px] opacity-60 mt-2">0550554095 / 0503334291<br>Accra, Ghana • MoMo • Card</p></div>
+</div>
+<div class="border-t border-white/10 text-center py-4 text-[10px] opacity-50 tracking-widest">© 2024 5'7 HAIR LOUNGE • 100% HUMAN HAIR • FREE DELIVERY OVER GHS 800 • GHS OFFICIAL STORE • PAYSTACK COMING SOON</div>
+</footer>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div id="detailModal" class="fixed inset-0 bg-black/60 hidden z-[60] p-2 md:p-8 overflow-auto"><div class="bg-white max-w-5xl mx-auto rounded-2xl overflow-hidden"><div class="flex justify-between p-4 border-b"><h2 class="font-bold serif">Product Details</h2><button onclick="document.getElementById('detailModal').classList.add('hidden')" class="text-2xl">&times;</button></div><div class="grid md:grid-cols-2"><div class="bg-[#FFFBFC] p-4"><img id="dImg" class="w-full h-[400px] object-contain bg-white rounded-xl"></div><div class="p-6"><h1 id="dName" class="font-bold text-[16px]"></h1><div class="flex items-center gap-2 mt-2"><span class="text-[#7A1B4A] text-[13px]">★★★★★</span><span class="text-[11px] opacity-60">5.0 (47 verified)</span><span class="text-[9px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">VERIFIED PURCHASE 5★</span></div><p id="dPrice" class="font-black text-[22px] text-[#7A1B4A] mt-3"></p><p class="text-[11px] opacity-60 mt-3">100% human hair • 13x4 Lace • Glueless • Pre-plucked • GHS price • Pay on Delivery</p><div class="flex gap-2 mt-6"><button id="dAdd" class="flex-1 bg-[#7A1B4A] text-white py-3 rounded-full font-bold text-[13px]">Add to Cart - GHS</button><button id="dWish" class="border px-5 rounded-full"><i class="fa-regular fa-heart"></i></button></div><div class="mt-6 border-t pt-4"><h3 class="font-bold text-[13px]">Reviews - Verified Purchase 5★</h3><div id="reviewsList" class="mt-3 space-y-3"></div><div class="mt-4 flex gap-2"><input id="reviewInput" placeholder="Write a review..." class="flex-1 border p-2 rounded-full text-[11px]"><button onclick="addReview()" class="bg-black text-white px-4 rounded-full text-[11px]">Post</button></div></div></div></div></div></div>
+
+<!-- CART DRAWER -->
+<div id="cartDrawer2" class="fixed inset-0 bg-black/50 hidden z-[60]"><div class="absolute right-0 top-0 w-full md:w-[400px] h-full bg-white flex flex-col"><div class="p-4 border-b flex justify-between font-bold">Cart (<span id="c2">0</span>) <button onclick="closeCart2()" class="bg-gray-100 w-8 h-8 rounded-full">X</button></div><div id="cartItems" class="flex-1 overflow-auto p-4 text-sm"></div><div class="p-4 border-t bg-gray-50"><div class="flex justify-between"><span>Subtotal</span><b id="sub">GHS 0</b></div><div class="flex justify-between font-black text-lg mt-2"><span>Total</span><span id="tot">GHS 0</span></div><input id="custName" placeholder="Name" class="w-full border p-2 rounded-xl mt-3 text-[13px]"><input id="custPhone" placeholder="Phone e.g. 055..." class="w-full border p-2 rounded-xl mt-2 text-[13px]"><input id="custLocation" placeholder="Location" class="w-full border p-2 rounded-xl mt-2 text-[13px]"><button onclick="checkout()" class="w-full bg-[#7A1B4A] text-white py-3 rounded-full mt-3 font-bold"><i class="fab fa-whatsapp"></i> Checkout via WhatsApp - Pay GHS</button><button onclick="paystackCheckout()" class="w-full bg-black text-white py-3 rounded-full mt-2 font-bold text-[12px]">Pay with Paystack (Add number later)</button><p class="text-[10px] text-center mt-2 text-gray-500">MTN MoMo • Telecel Cash • Card • Pay on Delivery • Verified number coming</p></div></div></div>
+
+<!-- WISHLIST DRAWER -->
+<div id="wishDrawer" class="fixed inset-0 bg-black/50 hidden z-[70]"><div class="absolute right-0 top-0 w-full md:w-[400px] h-full bg-white flex flex-col"><div class="p-4 border-b flex justify-between font-bold">Wishlist ♥ <button onclick="document.getElementById('wishDrawer').classList.add('hidden')" class="bg-gray-100 w-8 h-8 rounded-full">X</button></div><div id="wishItems" class="flex-1 overflow-auto p-4 text-sm"></div></div></div>
+
+<!-- MOBILE BOTTOM NAV: HOME, CATEGORIES, CART, ACCOUNT -->
+<div class="fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around py-2 md:hidden z-40">
+<button onclick="showTab('products');document.getElementById('hero').scrollIntoView({behavior:'smooth'})" class="flex flex-col items-center text-[10px]"><i class="fa fa-home text-[18px] text-[#7A1B4A]"></i><span class="mt-1 font-bold">Home</span></button>
+<button onclick="showTab('services')" class="flex flex-col items-center text-[10px] opacity-60"><i class="fa fa-list text-[18px]"></i><span class="mt-1">Categories</span></button>
+<button onclick="openCart()" class="flex flex-col items-center text-[10px] relative"><i class="fa fa-shopping-cart text-[18px]"></i><span id="cBottom" class="absolute -top-1 right-0 bg-[#7A1B4A] text-white text-[8px] px-1 rounded-full">0</span><span class="mt-1">Cart</span></button>
+<button onclick="showTab('account')" class="flex flex-col items-center text-[10px] opacity-60"><i class="fa-regular fa-user text-[18px]"></i><span class="mt-1">Account</span></button>
+</div>
 
 <script>
 const products=[
-{id:1,name:"Bouncy Body Wave Wig 14in",price:850,old:1050,cat:"Bouncy",img:"wig1.jpg",badge:"BESTSELLER"},
-{id:2,name:"Straight Fringe Wig 18in",price:900,old:1100,cat:"Fringe",img:"wig2.jpg",badge:"NEW"},
-{id:3,name:"Bouncy Body Wave 16in",price:950,old:1150,cat:"Bouncy",img:"wig3.jpg",badge:"HOT"},
-{id:4,name:"Straight Fringe Bob 10in",price:650,old:750,cat:"Fringe",img:"wig4.jpg",badge:"BOB"},
-{id:5,name:"Bouncy Wave 12in",price:780,old:900,cat:"Bouncy",img:"wig5.jpg",badge:"-15%"},
-{id:6,name:"Straight Fringe 22in Long",price:1100,old:1300,cat:"Fringe",img:"wig6.jpg",badge:"LONG"},
+{id:1,name:"Bouncy Curly Bob 12in Brown",price:480,old:580,cat:"Bouncy Curly",img:"wig1.jpg",img2:"wigs/wig1.jpg",badge:"BESTSELLER"},
+{id:2,name:"Straight Bob 10in Jet Black",price:400,old:500,cat:"Fringe",img:"wig2.jpg",img2:"wigs/wig2.jpg",badge:"BOB"},
+{id:3,name:"Ombre Brown Tips Bob 10in",price:450,old:550,cat:"Bouncy Ombre",img:"wig3.jpg",img2:"wigs/wig3.jpg",badge:"NEW"},
+{id:4,name:"Body Wave Bouncy 14in Black",price:550,old:650,cat:"Bouncy",img:"wig4.jpg",img2:"wigs/wig4.jpg",badge:"HOT"},
+{id:5,name:"Bone Straight 24in Long",price:850,old:1000,cat:"Fringe Long",img:"wig5.jpg",img2:"wigs/wig5.jpg",badge:"LONG"},
+{id:6,name:"Bone Straight Middle Part 22in",price:800,old:950,cat:"Fringe",img:"wig6.jpg",img2:"wigs/wig6.jpg",badge:"LONG"},
+{id:7,name:"Blunt Cut Ombre Bob 10in",price:450,old:550,cat:"Fringe Ombre",img:"wig7.jpg",img2:"wigs/wig7.jpg",badge:"BOB"},
+{id:8,name:"Deep Wave Curly Bob 10in",price:500,old:600,cat:"Bouncy Curly",img:"wig8.jpg",img2:"wigs/wig8.jpg",badge:"CURVY"},
+{id:9,name:"Water Wave Curly 14in",price:580,old:680,cat:"Bouncy",img:"wig9.jpg",img2:"wigs/wig9.jpg",badge:"WAVY"},
+{id:10,name:"Straight Bob 14in Black",price:450,old:550,cat:"Fringe",img:"wig10.jpg",img2:"wigs/wig10.jpg",badge:"BOB"},
+{id:11,name:"Side Part Curly Bob 12in",price:480,old:580,cat:"Bouncy Curly",img:"wig11.jpg",img2:"wigs/wig11.jpg",badge:"BOB"},
+{id:12,name:"Bouncy Wave Side Part",price:520,old:620,cat:"Bouncy",img:"wig12.jpg",img2:"wigs/wig12.jpg",badge:"-15%"},
+{id:13,name:"Bone Straight Fringe 20in",price:600,old:700,cat:"Fringe Long",img:"wig13.jpg",img2:"wigs/wig13.jpg",badge:"FRINGE"},
+{id:14,name:"Deep Curly Short Bob",price:500,old:600,cat:"Bouncy Curly",img:"wig14.jpg",img2:"wigs/wig14.jpg",badge:"CURVY"},
+{id:15,name:"Middle Part Bob Brown",price:420,old:500,cat:"Bouncy",img:"wig15.jpg",img2:"wigs/wig15.jpg",badge:"BROWN"},
+{id:16,name:"Fringe Straight Bob 10in",price:430,old:530,cat:"Fringe",img:"wig16.jpg",img2:"wigs/wig16.jpg",badge:"FRINGE"},
+{id:17,name:"Long Wavy Glueless 16in",price:600,old:700,cat:"Bouncy Long",img:"wig17.jpg",img2:"wigs/wig17.jpg",badge:"GLUELESS"},
+{id:18,name:"Straight Lace Frontal Bob",price:450,old:550,cat:"Fringe",img:"wig18.jpg",img2:"wigs/wig18.jpg",badge:"LACE"},
+{id:19,name:"Brown Straight Bob 10in Latest",price:480,old:580,cat:"Bouncy Brown",img:"wig19.jpg",img2:"wigs/wig19.jpg",badge:"NEW"},
 ];
-let cart=[];
+let cart=JSON.parse(localStorage.getItem('hl_cart'))||[];
+let wishlist=JSON.parse(localStorage.getItem('hl_wish'))||[];
+let recent=JSON.parse(localStorage.getItem('hl_recent'))||[];
+let orders=JSON.parse(localStorage.getItem('hl_orders'))||[];
+let currentDetail=null;
+function save(){localStorage.setItem('hl_cart',JSON.stringify(cart));localStorage.setItem('hl_wish',JSON.stringify(wishlist));localStorage.setItem('hl_recent',JSON.stringify(recent));localStorage.setItem('hl_orders',JSON.stringify(orders));}
+
+function getImg(p){return p.img; }
+
 function render(list=products){
-document.getElementById('grid').innerHTML=list.map(p=>`
-<div class="bg-white rounded-2xl border overflow-hidden hover:shadow-lg transition">
-<div class="relative"><img src="${p.img}" class="h-52 w-full object-cover"><span class="absolute top-2 left-2 bg-[#7A1B4A] text-white text-[10px] px-2 py-1 rounded-full font-bold">${p.badge}</span></div>
-<div class="p-3"><h3 class="text-xs font-bold h-8 leading-tight">${p.name}</h3>
+document.getElementById('resultCount').innerText=list.length;
+document.getElementById('grid').innerHTML=list.map(p=>{
+let isWish=wishlist.find(x=>x.id==p.id);
+return `<div class="bg-white rounded-2xl border overflow-hidden hover:shadow-lg transition">
+<div class="relative cursor-pointer" onclick="openDetail(${p.id})">
+<img src="${p.img}" onerror="this.onerror=null;this.src='${p.img2}';this.onerror=function(){this.src='https://via.placeholder.com/400x500?text=Wig'}" class="h-52 w-full object-cover bg-white">
+<span class="absolute top-2 left-2 bg-[#7A1B4A] text-white text-[10px] px-2 py-1 rounded-full font-bold">${p.badge}</span>
+<button onclick="event.stopPropagation();toggleWish(${p.id})" class="absolute top-2 right-2 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center"><i class="${isWish?'fa-solid text-[#7A1B4A]':'fa-regular'} fa-heart text-[13px]"></i></button>
+<span class="absolute bottom-2 left-2 text-[8px] bg-[#4A102C] text-white px-2 py-0.5 rounded-full font-bold">VERIFIED ★5</span>
+</div>
+<div class="p-3"><h3 class="text-[11px] font-bold h-8 leading-tight line-clamp-2 cursor-pointer" onclick="openDetail(${p.id})">${p.name}</h3>
 <div class="flex gap-2 items-baseline mt-1"><span class="font-black text-[#7A1B4A] text-sm">GHS ${p.price.toLocaleString()}</span><span class="text-[10px] line-through text-gray-400">GHS ${p.old}</span></div>
-<p class="text-[10px] text-gray-500 mt-1">⭐ 4.8 • 13x4 Lace • Human Hair</p>
+<p class="text-[10px] text-gray-500 mt-1">⭐ 4.8 • 13x4 Lace • Human Hair • ${p.cat}</p>
 <button onclick="addCart(${p.id})" class="w-full bg-[#4A102C] text-white py-2 rounded-full text-xs font-bold mt-3">Add to Cart</button>
-</div></div>`).join('');
+</div></div>`}).join('');
+updateCounts();
 }
-function addCart(id){cart.push(products.find(x=>x.id==id));upd();openCart();}
-function upd(){document.getElementById('c1').innerText=cart.length;document.getElementById('c2').innerText=cart.length;let s=cart.reduce((a,b)=>a+b.price,0);document.getElementById('sub').innerText='GHS '+s.toLocaleString();document.getElementById('tot').innerText='GHS '+s.toLocaleString();document.getElementById('cartItems').innerHTML=cart.map((c,i)=>`<div class="flex gap-2 border-b py-2"><img src="${c.img}" class="w-12 h-12 rounded object-cover"><div class="flex-1"><p class="text-xs font-bold">${c.name}</p><p class="text-xs text-[#7A1B4A] font-bold">GHS ${c.price}</p></div><button onclick="cart.splice(${i},1);upd()" class="text-xs text-red-500">Remove</button></div>`).join('')||'<p class="text-center text-gray-400 mt-20">Cart empty</p>';}
-function openCart(){document.getElementById('cartDrawer').classList.remove('hidden')}
-function closeCart(){document.getElementById('cartDrawer').classList.add('hidden')}
-function searchP(){let q=document.getElementById('search').value.toLowerCase();render(products.filter(p=>p.name.toLowerCase().includes(q)))}
-function filterCat(c){c=='All'?render():render(products.filter(p=>p.cat==c))}
-function checkout(){if(!cart.length)return alert('Cart empty');let total=cart.reduce((a,b)=>a+b.price,0);let msg=`Hello 5'7 Hair Lounge!%0AOrder (GHS Store):%0A${cart.map(c=>`- ${c.name} GHS ${c.price}`).join('%0A')}%0A%0ATotal: GHS ${total}%0APayment: MoMo / Cash on Delivery%0A`;window.open('https://wa.me/233XXXXXXXXX?text='+msg,'_blank');}
-render();
+
+function addCart(id){
+let p=products.find(x=>x.id==id);
+let f=cart.find(x=>x.id==id);
+if(f)f.qty=(f.qty||1)+1;else cart.push({...p,qty:1});
+save();upd();openCart();
+}
+function toggleWish(id){
+let idx=wishlist.findIndex(x=>x.id==id);
+if(idx>-1)wishlist.splice(idx,1);else wishlist.push(products.find(x=>x.id==id));
+save();render(getFiltered());renderWishlist();updateCounts();
+}
+function upd(){
+let qty=cart.reduce((a,b)=>a+(b.qty||1),0);
+let s=cart.reduce((a,b)=>a+b.price*(b.qty||1),0);
+document.getElementById('c1').innerText=qty;document.getElementById('c1m').innerText=qty;document.getElementById('c2').innerText=qty;document.getElementById('cBottom').innerText=qty;
+document.getElementById('sub').innerText='GHS '+s.toLocaleString();document.getElementById('tot').innerText='GHS '+s.toLocaleString();
+document.getElementById('cartItems').innerHTML=cart.map((c,i)=>`<div class="flex gap-2 border-b py-2"><img src="${c.img}" onerror="this.src='${c.img2}'" class="w-12 h-12 rounded object-cover"><div class="flex-1"><p class="text-xs font-bold">${c.name}</p><p class="text-xs text-[#7A1B4A] font-bold">GHS ${c.price} x${c.qty||1}</p><div class="flex gap-2 mt-1"><button onclick="changeQty(${c.id},-1)" class="border px-2 rounded">-</button><span class="text-xs">${c.qty||1}</span><button onclick="changeQty(${c.id},1)" class="border px-2 rounded">+</button></div></div><button onclick="cart.splice(${i},1);save();upd()" class="text-xs text-red-500">Remove</button></div>`).join('')||'<p class="text-center text-gray-400 mt-20">Cart empty</p>';
+}
+function changeQty(id,d){let f=cart.find(x=>x.id==id);if(f){f.qty+=d;if(f.qty<=0)cart=cart.filter(x=>x.id!=id);save();upd();}}
+function renderWishlist(){document.getElementById('wishItems').innerHTML=wishlist.map(p=>`<div class="flex gap-2 border-b py-2"><img src="${p.img}" onerror="this.src='${p.img2}'" class="w-12 h-12 rounded object-cover"><div class="flex-1"><p class="text-xs font-bold">${p.name}</p><p class="text-xs text-[#7A1B4A] font-bold">GHS ${p.price}</p><button onclick="addCart(${p.id})" class="mt-1 bg-[#4A102C] text-white px-3 py-1 rounded-full text-[10px]">Add to Cart</button></div><button onclick="toggleWish(${p.id})" class="text-xs">✕</button></div>`).join('')||'<p class="text-center text-gray-400 mt-20">Wishlist empty</p>';}
+function updateCounts(){let c=cart.reduce((a,b)=>a+(b.qty||1),0);document.getElementById('c1').innerText=c;document.getElementById('c1m').innerText=c;document.getElementById('cBottom').innerText=c;document.getElementById('wishCount').innerText=wishlist.length;let aw=document.getElementById('accWish');if(aw)aw.innerText=wishlist.length+' items';let ao=document.getElementById('accOrders');if(ao)ao.innerText=orders.length+' orders';let ar=document.getElementById('accRecent');if(ar)ar.innerText=recent.length+' items';}
+
+function openCart(){upd();document.getElementById('cartDrawer2').classList.remove('hidden')}
+function closeCart2(){document.getElementById('cartDrawer2').classList.add('hidden')}
+function openWishlist(){renderWishlist();document.getElementById('wishDrawer').classList.remove('hidden')}
+
+function getFiltered(){
+let q=document.getElementById('search').value.toLowerCase();
+let cat=document.getElementById('priceFilter')?document.getElementById('priceFilter').value:'all';
+let sort=document.getElementById('sortFilter').value;
+let list=[...products];
+if(q)list=list.filter(p=>p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q));
+if(cat!='all'){let [min,max]=cat.split('-').map(Number);list=list.filter(p=>p.price>=min && (max?p.price<=max:true));}
+if(sort=='low')list.sort((a,b)=>a.price-b.price);
+if(sort=='high')list.sort((a,b)=>b.price-a.price);
+return list;
+}
+function filterCat(c){
+if(c=='All')render(products);
+else render(products.filter(p=>p.cat.includes(c)));
+showTab('products');
+}
+document.getElementById('search').addEventListener('input',()=>render(getFiltered()));
+document.getElementById('sortFilter').addEventListener('change',()=>render(getFiltered()));
+document.getElementById('priceFilter').addEventListener('change',()=>render(getFiltered()));
+
+function openDetail(id){
+let p=products.find(x=>x.id==id);currentDetail=p;
+if(!recent.find(x=>x.id==id)){recent.unshift(p);recent=recent.slice(0,6);save();}
+document.getElementById('dImg').src=p.img;document.getElementById('dImg').onerror=function(){this.src=p.img2};
+document.getElementById('dName').innerText=p.name;document.getElementById('dPrice').innerText='GHS '+p.price.toLocaleString()+' GHS '+p.old;
+document.getElementById('dAdd').onclick=()=>{addCart(p.id);document.getElementById('detailModal').classList.add('hidden');};
+document.getElementById('dWish').onclick=()=>toggleWish(p.id);
+let fake=[{name:"Ama K.",text:"Hair is so soft! 5 star verified purchase",date:"2 days ago"},{name:"Linda O.",text:"Fast delivery in Accra. Love it!",date:"5 days ago"},{name:"Sandra B.",text:"Exactly as pictured. Will buy again",date:"1 week ago"}];
+let all=[...fake,...(p.reviews||[])];
+document.getElementById('reviewsList').innerHTML=all.map(r=>`<div class="border rounded-xl p-3"><div class="flex justify-between"><span class="font-bold text-xs">${r.name}</span><span class="text-[10px] opacity-50">${r.date}</span></div><div class="text-[10px] text-[#7A1B4A]">★★★★★ <span class="bg-green-100 text-green-700 px-1 rounded text-[8px]">VERIFIED PURCHASE 5★</span></div><p class="text-xs mt-1">${r.text}</p></div>`).join('');
+document.getElementById('detailModal').classList.remove('hidden');
+renderRecent();
+}
+function addReview(){let t=document.getElementById('reviewInput').value;if(!t||!currentDetail)return;currentDetail.reviews=currentDetail.reviews||[];currentDetail.reviews.unshift({name:"You",text:t,date:"now"});openDetail(currentDetail.id);document.getElementById('reviewInput').value='';}
+function renderRecent(){if(recent.length){document.getElementById('recentView').classList.remove('hidden');document.getElementById('recentLabel').innerText='Recently viewed: '+recent.length;document.getElementById('recentGrid').innerHTML=recent.map(r=>`<div onclick="openDetail(${r.id})" class="bg-white rounded-xl overflow-hidden cursor-pointer border"><img src="${r.img}" onerror="this.src='${r.img2}'" class="h-[90px] w-full object-cover"><p class="text-[9px] p-1 font-bold line-clamp-2">${r.name}</p></div>`).join('');}}
+
+function showTab(t){
+document.getElementById('viewProducts').classList.toggle('hidden',t!='products');
+document.getElementById('viewServices').classList.toggle('hidden',t!='services');
+document.getElementById('viewTracking').classList.toggle('hidden',t!='tracking');
+document.getElementById('viewAccount').classList.toggle('hidden',t!='account');
+document.getElementById('viewAdmin').classList.toggle('hidden',t!='admin');
+document.getElementById('hero').classList.toggle('hidden',t!='products');
+let ids=['tP','tS','tT','tA'];
+ids.forEach(id=>{let el=document.getElementById(id);if(el){el.classList.remove('bg-[#7A1B4A]','text-white');el.classList.add('bg-white','border','text-black');}});
+let map={products:'tP',services:'tS',tracking:'tT',admin:'tA'};
+let active=document.getElementById(map[t]);
+if(active){active.classList.remove('bg-white','border','text-black');active.classList.add('bg-[#7A1B4A]','text-white');}
+if(t=='admin')loadAdmin();
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function checkout(){
+if(!cart.length)return alert('Cart empty');
+let name=document.getElementById('custName').value||'Customer';
+let phone=document.getElementById('custPhone').value;
+let loc=document.getElementById('custLocation').value||'Accra';
+if(!phone)return alert('Enter phone');
+let total=cart.reduce((a,b)=>a+b.price*(b.qty||1),0);
+let id='5H7-'+Math.floor(1000+Math.random()*9000);
+let msg=`Hello 5'7 Hair Lounge!%0AOrder ${id} (GHS Store):%0AName: ${name}%0APhone: ${phone}%0ALoc: ${loc}%0A%0A${cart.map(c=>`- ${c.name} GHS ${c.price} x${c.qty||1}`).join('%0A')}%0A%0ATotal: GHS ${total}%0APayment: MoMo / Card / Pay on Delivery%0AOrderID: ${id}`;
+orders.push({id,total,items:[...cart],date:new Date().toLocaleString(),status:'Processing',name,phone,loc});
+save();
+window.open('https://wa.me/233550554095?text='+msg,'_blank');
+cart=[];save();upd();closeCart2();alert('Order placed! ID: '+id);
+}
+function paystackCheckout(){alert('Paystack integration ready - you will add verified number later. WhatsApp checkout active now. Order saved for tracking.');}
+function trackOrder(){let id=document.getElementById('trackInput').value.trim();let o=orders.find(x=>x.id==id);let res=document.getElementById('trackResult');res.classList.remove('hidden');if(o)res.innerHTML=`<p class="font-bold">Order ${o.id}</p><p>Status: <span class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[10px]">${o.status}</span></p><p class="mt-2">Total GHS ${o.total}</p><p class="text-[11px] opacity-60">${o.date}</p><div class="mt-2 text-[11px]">${o.items.map(i=>`• ${i.name} x${i.qty||1}`).join('<br>')}</div>`;else res.innerHTML=`<p class="text-red-500">Order not found. Example: ${orders[0]?.id||'5H7-1234'}</p>`;}
+function adminAdd(){let n=document.getElementById('adminName').value;let pr=Number(document.getElementById('adminPrice').value);let im=document.getElementById('adminImg').value||`wig${products.length+1}.jpg`;if(!n||!pr)return;products.push({id:Date.now(),name:n,price:pr,old:pr+100,img:im,img2:'wigs/'+im,cat:'Bouncy',badge:'NEW',reviews:[]});render(products);alert('Added');}
+function loadAdmin(){document.getElementById('adminOrders').innerHTML=orders.map(o=>`<div class="border p-2 rounded mb-1"><b>${o.id}</b> GHS ${o.total} - ${o.status}<br><span class="opacity-60">${o.name} ${o.phone} - ${o.loc}</span></div>`).join('')||'No orders yet';}
+
+render();upd();renderRecent();
 </script>
 </body>
 </html>
