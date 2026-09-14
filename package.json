@@ -1,0 +1,37 @@
+{
+  "name": "5-7-hair-lounge",
+  "version": "1.0.0",
+  "description": "5'7 Hair Lounge - Premium Wigs Ghana",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kennysmithderulo-cmyk/5_7hair-Lounge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kennysmithderulo-cmyk/5_7hair-Lounge/issues"
+  },
+  "homepage": "https://github.com/kennysmithderulo-cmyk/5_7hair-Lounge#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.116.0",
+    "@vercel/analytics": "^2.0.1",
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.5.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.5",
+    "typescript": "^7.0.2"
+  }
+}
